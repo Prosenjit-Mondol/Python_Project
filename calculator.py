@@ -1,5 +1,7 @@
 from tkinter import*
 
+firstnu=secondnu=operator=None
+
 root = Tk()
 root.title('Calculator')
 root.geometry('280x388')
@@ -14,6 +16,28 @@ def getdi(digit):
 def clear():
     result_lavel.config(text='')
 
+
+def getop(op):
+    global firstnu,operator
+    firstnu=int(result_lavel['text'])
+    operator=op
+    result_lavel.config(text='')
+
+def result():
+    global firstnu,secondnu,operator
+    secondnu=int(result_lavel['text'])
+
+    if operator=='+':
+        result_lavel.config(text=str(firstnu+secondnu))
+    elif operator=='-':
+        result_lavel.config(text=(str(firstnu-secondnu)))
+    elif operator=='*':
+        result_lavel.config(text=(str(firstnu*secondnu)))
+    elif operator=='/':
+        if secondnu==0:
+            result_lavel.config(text='Error')
+        else:
+            result_lavel.config(text=(str(round(firstnu/secondnu,2))))
 
 result_lavel=Label(root,text='',bg='black',fg='white')
 result_lavel.grid(row=0,column=0,columnspan=10,sticky='w',pady=(50,25))
@@ -55,15 +79,15 @@ btn3=Button(root,text='3',bg='#00a65a',fg='white',width=5,height=2,command=lambd
 btn3.grid(row=3,column=2)
 btn3.config(font=('verdana',14))
 
-btnad=Button(root,text='+',bg='#00a65a',fg='white',width=5,height=2)
+btnad=Button(root,text='+',bg='#00a65a',fg='white',width=5,height=2,command=lambda:getop('+'))
 btnad.grid(row=1,column=3)
 btnad.config(font=('verdana',14))
 
-btnsu=Button(root,text='-',bg='#00a65a',fg='white',width=5,height=2)
+btnsu=Button(root,text='-',bg='#00a65a',fg='white',width=5,height=2,command=lambda:getop('-'))
 btnsu.grid(row=2,column=3)
 btnsu.config(font=('verdana',14))
 
-btnmu=Button(root,text='x',bg='#00a65a',fg='white',width=5,height=2)
+btnmu=Button(root,text='x',bg='#00a65a',fg='white',width=5,height=2,command=lambda:getop('*'))
 btnmu.grid(row=3,column=3)
 btnmu.config(font=('verdana',14))
 
@@ -75,11 +99,11 @@ btnze=Button(root,text='0',bg='#00a65a',fg='white',width=5,height=2,command=lamb
 btnze.grid(row=4,column=1)
 btnze.config(font=('verdana',14))
 
-btneq=Button(root,text='=',bg='#00a65a',fg='white',width=5,height=2)
+btneq=Button(root,text='=',bg='#00a65a',fg='white',width=5,height=2,command=lambda:result())
 btneq.grid(row=4,column=2)
 btneq.config(font=('verdana',14))
 
-btndi=Button(root,text='/',bg='#00a65a',fg='white',width=5,height=2)
+btndi=Button(root,text='/',bg='#00a65a',fg='white',width=5,height=2,command=lambda:getop('/'))
 btndi.grid(row=4,column=3)
 btndi.config(font=('verdana',14))
 
