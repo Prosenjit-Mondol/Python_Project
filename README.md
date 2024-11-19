@@ -1,1 +1,1 @@
-# This project are made by me in python language
+# This project are made by using python language
